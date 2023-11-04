@@ -7,8 +7,7 @@ task:
     memory: 16G
     timeout_in: 120m
 
-  build:
-    custom_script:
-      - docker build . -t vbramselaar/icecat-builder
-      - mkdir -p result
-      - docker run -it --rm -v $(pwd)/result:/home/builder/result vbramselaar/icecat-builder
+  build_script:
+    - docker build . -t vbramselaar/icecat-builder
+    - mkdir -p result
+    - docker run -it --rm -v $(pwd)/result:/home/builder/result vbramselaar/icecat-builder
