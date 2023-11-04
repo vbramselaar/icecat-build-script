@@ -1,9 +1,14 @@
-container:
-  image: node:latest
+task:
+  compute_engine_instance:
+    image_project: cirrus-images
+    image: family/docker-builder
+    platform: linux
+    cpu: 4
+    memory: 16G
+    timeout_in: 120m
 
-check_task:
-  node_modules_cache:
-    folder: node_modules
-    fingerprint_script: cat yarn.lock
-    populate_script: yarn install
-  test_script: yarn test 
+  build:
+    custom_script:
+      - docker build . -t vbramselaar/icecat-builder
+      - mkdir -p result
+      - docker run -it --rm -v $(pwd)/result:/home/builder/result vbramselaar/icecat-builder
