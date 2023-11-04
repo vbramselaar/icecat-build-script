@@ -14,4 +14,4 @@ task:
     - cd ./gnu-icecat-build-script
     - docker build . -t vbramselaar/icecat-builder
     - mkdir -p result
-    - docker run -it --rm -v $(pwd)/result:/home/builder/result vbramselaar/icecat-builder
+    - docker run --rm -v $(pwd)/result:/home/builder/result vbramselaar/icecat-builder
