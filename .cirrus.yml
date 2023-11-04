@@ -3,7 +3,7 @@ task:
     image_project: cirrus-images
     image: family/docker-builder
     platform: linux
-    cpu: 4
+    cpu: 8
     memory: 16G
     timeout_in: 120m
 
