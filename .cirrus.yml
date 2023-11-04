@@ -8,6 +8,8 @@ task:
     timeout_in: 120m
 
   build_script:
+    - pwd
+    - ls
     - cd ./gnu-icecat-build-script
     - docker build . -t vbramselaar/icecat-builder
     - mkdir -p result
