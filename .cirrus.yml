@@ -9,6 +9,7 @@ task:
 
   build_script:
     - pwd
+    - git submodule update --init --recursive
     - ls
     - cd ./gnu-icecat-build-script
     - docker build . -t vbramselaar/icecat-builder
