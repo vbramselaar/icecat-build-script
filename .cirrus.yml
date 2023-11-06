@@ -8,14 +8,8 @@ compute_engine_instance:
 env:
   CIRRUS_CLONE_SUBMODULES: true
 
-docker_builder:
-  name: docker
-  build_script: docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
-
 generate_task:
   timeout_in: 120m
-  depends_on:
-    - docker
   result_cache:
     folder: result
     fingerprint_key: gnuzilla
@@ -24,8 +18,9 @@ generate_task:
   generate_script:
     - pwd
     - ls
+    - docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
     - docker run --rm -e stage=generate -v $(pwd)/result:/root/result vbramselaar/icecat-builder
-  binaries_artifacts:
+  gnuzilla_source_artifacts:
     path: "result/*.tar.bz2"
 
 build_task:
@@ -37,5 +32,8 @@ build_task:
     fingerprint_key: gnuzilla
   build_script:
     - pwd
-    - ls
+    - ls result
+    - docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
     - docker run --rm -e stage=build -v $(pwd)/result:/root/result vbramselaar/icecat-builder
+  icecat_build_artifacts:
+    path: "result/icecat"
