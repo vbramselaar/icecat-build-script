@@ -1,15 +1,10 @@
-container:
-  dockerfile: Dockerfile
-  cpu: 8
-  memory: 16G
-
 env:
   CIRRUS_CLONE_SUBMODULES: true
 
 generate_task:
   timeout_in: 120m
   container:
-    dockerfile: gnu-icecat-build-script/Dockerfile
+    dockerfile: Dockerfile
     docker_arguments:
       stage: generate
     cpu: 8
@@ -26,7 +21,7 @@ generate_task:
 build_task:
   timeout_in: 120m
   container:
-    dockerfile: gnu-icecat-build-script/Dockerfile
+    dockerfile: Dockerfile
     docker_arguments:
       stage: build
     cpu: 8
