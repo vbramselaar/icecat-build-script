@@ -9,10 +9,13 @@ env:
   CIRRUS_CLONE_SUBMODULES: true
 
 docker_builder:
+  name: docker
   build_script: docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
 
 generate_task:
   timeout_in: 120m
+  depends_on:
+    - docker
   result_cache:
     folder: result
     fingerprint_key: gnuzilla
@@ -27,11 +30,11 @@ generate_task:
 
 build_task:
   timeout_in: 120m
+  depends_on:
+    - generate
   result_cache:
     folder: result
     fingerprint_key: gnuzilla
-  depends_on:
-    - generate
   build_script:
     - pwd
     - ls
