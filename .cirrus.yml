@@ -19,7 +19,7 @@ generate_task:
     - pwd
     - ls
     - docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
-    - docker run --rm --network host -e stage=generate -v $(pwd)/result:/root/result vbramselaar/icecat-builder
+    - docker run --rm -e stage=generate -v $(pwd)/result:/root/result vbramselaar/icecat-builder
   artifacts:
     name: Gnuzilla source
     path: "result/*.tar.bz2"
@@ -35,7 +35,7 @@ build_task:
     - pwd
     - ls result
     - docker build gnu-icecat-build-script -t vbramselaar/icecat-builder
-    - docker run --rm --network host -e stage=build -v $(pwd)/result:/root/result vbramselaar/icecat-builder
+    - docker run --rm -e stage=build -v $(pwd)/result:/root/result vbramselaar/icecat-builder
   artifacts:
     name: Icecat build
     path: "result/build/*.tar.bz2"
